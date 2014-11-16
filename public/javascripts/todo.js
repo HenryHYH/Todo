@@ -16,6 +16,13 @@ $(function () {
         cur.parent().addClass("active").find("i").removeClass("fa-folder-o").addClass("fa-folder-open-o").end()
             .siblings(".active").removeClass("active").find("i").removeClass("fa-folder-open-o").addClass("fa-folder-o");
     });
+
+    $("#task-list").delegate("li", "click", function () {
+        SelectTodo($(this));
+    }).delegate("input[type='checkbox']", "click", function (e) {
+        ChangeTodoStatus($(this));
+        e.stopPropagation();
+    });
 });
 
 // 绑定Group
@@ -83,6 +90,29 @@ function SaveTodo() {
             else {
                 alert(result.msg);
             }
+        }
+    });
+}
+
+// 选择todo
+function SelectTodo($curLi) {
+    $curLi.toggleClass("selected");
+}
+
+// 改变todo状态
+function ChangeTodoStatus(ctrl) {
+    var finished = ctrl.prop('checked');
+
+    $.ajax('/ajax/todo/changestatus', {
+        type: 'post',
+        data: {finished: finished, taskid: ctrl.attr('data-item-id')},
+        success: function (result) {
+            if (result && result.success) {
+                //SelectGroup();
+                ctrl.parent().toggleClass('finished');
+            }
+            else
+                alert(result.msg);
         }
     });
 }

@@ -105,7 +105,7 @@ a:hover {
 }
 
 #task-container {
-	padding: 0 20px;
+	padding: 0 20px 20px;
 }
 
 #task-add-container {
@@ -125,8 +125,23 @@ a:hover {
 	border: none;
 }
 
+#task-toolbar-container {
+	margin-top: 20px;
+}
+
+#task-toolbar-container .btn {
+	font-size: 18px;
+	border-radius: 4px;
+	width: 46px;
+	text-align: center;
+	padding: 5px;
+	display: inline-block;
+	background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.97), rgba(220, 220, 220, 0.97));
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
 #task-list-container {
-	margin-top: 25px;
+	margin-top: 10px;
 }
 
 #task-list li {
@@ -137,6 +152,15 @@ a:hover {
 	padding: 10px;
 	color: #737272;
 	font-weight: bold;
+	cursor: pointer;
+}
+
+#task-list li.finished {
+	opacity: 0.6;
+}
+
+#task-list li.finished span {
+	text-decoration: line-through;
 }
 
 #task-list li.selected {

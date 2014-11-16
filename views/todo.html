@@ -25,7 +25,21 @@
             </div>
         </div>
         <div id="toolbar-scroll">
-            <ul id="group-list"></ul>
+            <ul id="group-list">
+                <script type="text/html" id="group-item">
+                    {{each data as item i}}
+                    <li {{if item._id == groupId}}class="active"{{/if}}>
+                    <a href="javascript:void(0);" data-group-id="{{item._id}}">
+                        {{if item._id == groupId}}
+                        <i class="fa fa-folder-open-o"></i>
+                        {{else}}
+                        <i class="fa fa-folder-o"></i>
+                        {{/if}}
+                        {{item.Name}}</a>
+                    </li>
+                    {{/each}}
+                </script>
+            </ul>
         </div>
     </div>
     <div id="content">
@@ -33,33 +47,28 @@
             <div id="task-add-container">
                 <input id="add-task-name" type="text" placeholder="添加任务"/>
             </div>
+            <div id="task-toolbar-container">
+                <a id="task-delete" href="javascript:void(0);"><span class="btn"><i class="fa fa-trash"></i></span></a>
+                <a id="task-view" href="javascript:void(0);"><span class="btn"><i class="fa fa-eye"></i></span></a>
+            </div>
             <div id="task-list-container">
-                <ul id="task-list"></ul>
+                <ul id="task-list">
+                    <script type="text/html" id="task-item">
+                        {{each data as item i}}
+                        <li {{if item.Finished}}class="finished"{{/if}}>
+                        <input type="checkbox" data-item-id="{{item._id}}"
+                        {{if item.Finished}}checked="checked"{{/if}}/>
+                        <span>{{item.Name}}</span>
+                        </li>
+                        {{/each}}
+                    </script>
+                </ul>
             </div>
         </div>
     </div>
 </div>
 <script type="text/javascript" src="/lib/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="/lib/artTemplate/template.js"></script>
-<script type="text/html" id="group-item">
-    {{each data as item i}}
-    {{if item._id == groupId}}
-    <li class="active"><a href="javascript:void(0);" data-group-id="{{item._id}}"><i class="fa fa-folder-open-o"></i>
-        {{item.Name}}</a></li>
-    {{else}}
-    <li><a href="javascript:void(0);" data-group-id="{{item._id}}"><i class="fa fa-folder-o"></i> {{item.Name}}</a></li>
-    {{/if}}
-    {{/each}}
-</script>
-<script type="text/html" id="task-item">
-    {{each data as item i}}
-    {{if i==0}}
-    <li class="selected"><label><input type="checkbox"/> {{item.Name}}</label></li>
-    {{else}}
-    <li><label><input type="checkbox"/> {{item.Name}}</label></li>
-    {{/if}}
-    {{/each}}
-</script>
 <script type="text/javascript" src="/javascripts/todo.js"></script>
 </body>
 </html>
