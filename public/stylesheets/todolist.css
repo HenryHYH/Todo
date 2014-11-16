@@ -1,0 +1,121 @@
+html, body {
+	height: 100%;
+	background: #f9f9f9;
+}
+
+a {
+	color: #a3a3a2;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #737272;
+}
+
+.highlight {
+	color: #1982d1;
+}
+
+#content-base {
+}
+
+#sidebar {
+	background: #fcfcfc;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	width: 270px;
+	box-shadow: 1px 0 2px #777;
+}
+
+#toolbar-header {
+	height: 37px;
+	border-bottom: 1px solid #fcfcfc;
+	box-shadow: 0 1px 2px #ccc;
+	padding: 0 10px;
+}
+
+#toolbar-header .container {
+	padding: 10px 0;
+}
+
+#toolbar-header .icon {
+	float: right;
+}
+
+#toolbar-footer {
+	height: 57px;
+	border-top: 1px solid #fcfcfc;
+	box-shadow: 0 -1px 2px #ccc;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	padding: 0 10px;
+}
+
+#toolbar-footer .container {
+	padding: 10px 0;
+	text-align: center;
+}
+
+#toolbar-footer #add-group-name {
+	border-radius: 4px;
+	border: 1px solid #ccc;
+	padding: 10px;
+}
+
+#toolbar-footer #add-group {
+	vertical-align: middle;
+}
+
+#toolbar-scroll {
+	margin-top: 10px;
+}
+
+#group-list {
+}
+
+#group-list li {
+	padding: 8px 10px;
+	overflow: hidden;
+}
+
+#group-list li:hover, #group-list li:hover a {
+	color: #000;
+}
+
+#group-list li.active, #group-list li.active a {
+	background: #009ae4;
+	color: #fff;
+}
+
+#group-list a {
+	display: block;
+}
+
+#content {
+	position: absolute;
+	left: 270px;
+	right: 5px;
+	top: 0;
+	bottom: 0;
+}
+
+#task-add-container {
+	padding: 30px 10px 10px;
+	text-align: center;
+}
+
+#task-add-container #add-task-name {
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	padding: 10px;
+	width: 95%;
+}
+
+#task-add-container #add-task {
+	vertical-align: middle;
+}

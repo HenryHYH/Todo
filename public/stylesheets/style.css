@@ -1,0 +1,8 @@
+body { padding: 10px 50px; font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+
+/* todo */
+.ulTodo li { padding: 4px; max-width: 250px; }
+.ulTodo li:hover { background: #ddd; }
+.ulTodo li span { cursor: pointer; }
+.ulTodo li a { float: right; cursor: pointer; }
+.ulTodo .finished { text-decoration: line-through; color: #777; }
