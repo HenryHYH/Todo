@@ -7,7 +7,6 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var todo = require('./routes/todo');
 
 var app = express();
 
@@ -17,6 +16,9 @@ app.set('views', path.join(__dirname, 'views'));
 var ejs = require('ejs');
 app.engine('html', ejs.__express);
 app.set('view engine', 'html');
+
+// 禁用 X-Powered-By
+app.disable('x-powered-by');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
@@ -28,9 +30,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
-app.use('/todo', todo);
+app.use('/todolist', require('./routes/todolist2'));
+app.use('/ajax/todolist', require('./ajax/todolist'));
+app.use('/todo', require('./routes/todo'));
+app.use('/ajax/group', require('./ajax/group'));
 app.use('/ajax/todo', require('./ajax/todo'));
-app.use('/todolist', require('./routes/todolist'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
