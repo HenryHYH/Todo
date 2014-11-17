@@ -1,11 +1,36 @@
 var express = require('express'),
     router = express.Router(),
-    Group = require('../models/group');
+    Group = require('../models/group'),
+    Todo = require('../models/todo');
 
 // 获取所有数据
 router.get('/', function (req, res) {
     Group.find(function (err, list) {
-        res.json({success: true, data: list});
+        var o = {
+            map: function () {
+                emit(this.GroupId, 1);
+            },
+            reduce: function (k, val) {
+                var total = 0;
+                for (var i = 0; i < val.length; i++) {
+                    total += val[i];
+                }
+                return total;
+            }
+        };
+        Todo.mapReduce(o, function (err, result) {
+            for (var i in result) {
+                for (var j in list) {
+                    if (result[i]._id.toString() == list[j]._id.toString()) {
+                        //.Count = result[i].value;
+                        break;
+                    }
+                }
+            }
+            console.log(list);
+
+            res.json({success: true, data: list});
+        });
     });
 });
 
