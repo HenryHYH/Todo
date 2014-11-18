@@ -81,6 +81,7 @@ a:hover {
 #group-list li {
 	padding: 8px 10px;
 	overflow: hidden;
+	color: #a3a3a2;
 }
 
 #group-list li:hover, #group-list li:hover a {
@@ -94,6 +95,11 @@ a:hover {
 
 #group-list a {
 	display: block;
+}
+
+#group-list .badge {
+	float: right;
+	font-weight: bold;
 }
 
 #content {

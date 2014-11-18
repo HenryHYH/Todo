@@ -1,5 +1,5 @@
 $(function () {
-    BindGroup();
+    BindGroups();
     $(document)
         .delegate("#add-group-name", "keyup", function (event) {
             if (event.keyCode == 13)
@@ -35,7 +35,7 @@ $(function () {
 });
 
 // 绑定Group
-function BindGroup(groupId) {
+function BindGroups(groupId) {
     $.ajax('/ajax/group', {
         success: function (result) {
             if (result && result.success && result.data.length > 0) {
@@ -46,6 +46,22 @@ function BindGroup(groupId) {
 
                 $("#group-list").html(template('group-item', result));
                 SelectGroup();
+            }
+        }
+    });
+}
+
+// 绑定指定ID的Group
+function BindGroup(groupId) {
+    if (!groupId)
+        groupId = $("#group-list li.active a").attr("data-group-id");
+
+    $.ajax('/ajax/group/' + groupId, {
+        success: function (result) {
+            if (result && result.success) {
+                $("#group-list a[data-group-id='" + groupId + "']")
+                    .siblings(".badge")
+                    .text(result.data.Count);
             }
         }
     });
@@ -62,7 +78,7 @@ function SaveGroup() {
             data: {name: name},
             success: function (result) {
                 txt.val('');
-                BindGroup($("#group-list li.active a").attr("data-group-id"));
+                BindGroups($("#group-list li.active a").attr("data-group-id"));
             }
         });
     }
@@ -96,8 +112,8 @@ function SaveTodo() {
         success: function (result) {
             if (result && result.success) {
                 txt.val('');
-                // BindGroup(groupId);
                 SelectGroup(groupId);
+                BindGroup(groupId);
             }
             else {
                 alert(result.msg);
@@ -121,6 +137,7 @@ function ChangeTodoStatus(ctrl) {
         success: function (result) {
             if (result && result.success) {
                 ctrl.parent().toggleClass('finished');
+                BindGroup();
             }
             else
                 alert(result.msg);

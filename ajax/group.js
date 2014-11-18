@@ -1,5 +1,6 @@
 var express = require('express'),
     router = express.Router(),
+    mongoose = require('mongoose'),
     Group = require('../models/group'),
     Todo = require('../models/todo');
 
@@ -16,13 +17,14 @@ router.get('/', function (req, res) {
                     total += val[i];
                 }
                 return total;
-            }
+            },
+            query: {Finished: false}
         };
         Todo.mapReduce(o, function (err, result) {
             for (var i in result) {
                 for (var j in list) {
                     if (result[i]._id.toString() == list[j]._id.toString()) {
-                        //.Count = result[i].value;
+                        list[j]._doc.Count = result[i].value;
                         break;
                     }
                 }
@@ -30,6 +32,18 @@ router.get('/', function (req, res) {
             console.log(list);
 
             res.json({success: true, data: list});
+        });
+    });
+});
+
+// 获取单条数据
+router.get("/:id", function (req, res) {
+    var groupId = req.param("id");
+
+    Group.findById(groupId, function (err, result) {
+        Todo.count({GroupId: mongoose.Types.ObjectId(groupId), Finished: false}, function (err, cnt) {
+            result._doc.Count = cnt;
+            res.json({success: true, data: result});
         });
     });
 });

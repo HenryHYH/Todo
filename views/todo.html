@@ -29,6 +29,7 @@
                 <script type="text/html" id="group-item">
                     {{each data as item i}}
                     <li {{if item._id == groupId}}class="active"{{/if}}>
+                    <span class="badge">{{item.Count}}</span>
                     <a href="javascript:void(0);" data-group-id="{{item._id}}">
                         {{if item._id == groupId}}
                         <i class="fa fa-folder-open-o"></i>
