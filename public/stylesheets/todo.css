@@ -1,6 +1,10 @@
 html, body {
 	height: 100%;
 	background: #f9f9f9;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 a {

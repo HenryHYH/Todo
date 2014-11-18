@@ -59,9 +59,10 @@ function BindGroup(groupId) {
     $.ajax('/ajax/group/' + groupId, {
         success: function (result) {
             if (result && result.success) {
+                var cnt = result.data.Count;
                 $("#group-list a[data-group-id='" + groupId + "']")
                     .siblings(".badge")
-                    .text(result.data.Count);
+                    .text(cnt == 0 ? "" : cnt);
             }
         }
     });
